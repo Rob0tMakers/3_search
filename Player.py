@@ -3,6 +3,9 @@ class Player:
     self.x = coords[0]
     self.y = coords[1]
 
+  def getCoords(self):
+    return [self.x, self.y]
+
   def move(self, move):
     # 1 = north
     if move == 1:
