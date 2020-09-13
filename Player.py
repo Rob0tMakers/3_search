@@ -1,11 +1,21 @@
 class Player:
-  def __init__(self, x, y):
-    self.x = x
-    self.y = y
+  def __init__(self, coords):
+    self.x = coords[0]
+    self.y = coords[1]
 
-  def move(self, x, y):
-    self.x = x
-    self.y = y
+  def move(self, move):
+    # 1 = north
+    if move == 1:
+      self.y -= 1
 
-  def checkWallCollision(self):
-    return None
+    # 2 = east
+    if move == 2:
+      self.x += 1
+
+    # 3 = south
+    if move == 3:
+      self.y += 1
+
+    # 4 = west
+    if move == 4:
+      self.x -= 1
