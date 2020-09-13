@@ -37,13 +37,13 @@ def readGame(filename):
 
 
 def feedForward(gameState):
-  game = Game(gameState, gameMap)
-  newstates = []
+  new_states = []
   for i in range(1, 5):
+    game = Game(gameState, gameMap)
     game.play(i)
-    game.getGamestate(None)
-
-  return [0, 1]
+    if game.getGamestate() != None:
+      new_states.append(game.getGamestate())
+  return new_states
 
 
 print(algorithm("sokoban.txt"))
