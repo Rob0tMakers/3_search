@@ -22,16 +22,16 @@ def readGame(filename):
   for y, line in enumerate(f):
     for x, icon in enumerate(line[:-1]):
       if icon == '#':
-        gameMap.walls.append([x, y])
+        gameMap.walls.append((x, y))
       if icon == '@':
-        playerCoords = [x, y]
+        playerCoords = (x, y)
       if icon == '$':
-        boxes.append([x, y])
+        boxes.append((x, y))
       if icon == '*':
-        boxes.append([x, y])
-        gameMap.goals.append([x, y])
+        boxes.append((x, y))
+        gameMap.goals.append((x, y))
       if icon == '.':
-        gameMap.goals.append([x, y])
+        gameMap.goals.append((x, y))
   startState = [playerCoords, boxes, [], 0]
   return startState, gameMap
 
@@ -41,6 +41,6 @@ def feedForward(gameState):
   for i in range(1, 5):
     game = Game(gameState, gameMap)
     game.play(i)
-    if game.getGamestate() != None:
-      new_states.append(game.getGamestate())
+    if game.getGameState() != None:
+      new_states.append(game.getGameState())
   return new_states

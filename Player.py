@@ -4,7 +4,7 @@ class Player:
     self.y = coords[1]
 
   def getCoords(self):
-    return [self.x, self.y]
+    return (self.x, self.y)
 
   def move(self, move):
     # 1 = north
