@@ -4,16 +4,25 @@ from box import Box
 from map import Map
 from algorithm import algorithm, readGame, feedForward
 
+# Player can move
+# Player cannot move into walls
+# Player can push blocks
+# Move history is transferred correctly
+# TO DO: double check if blocks can be pushed into walls?
+# TO DO: Check win state?
+# TO DO:
+
 startState, gameMap = readGame("sokoban.txt")
 print(startState)
 print()
-print("East")
+print("North")
 game = Game(startState, gameMap)
 print(game.moveHistory)
-game.play(2)
+game.play(1)
 print(game.getGameState())
 print()
 print("South")
+print("Start" + str(startState))
 game1 = Game(startState, gameMap)
 print(game1.moveHistory)
 game1.play(3)

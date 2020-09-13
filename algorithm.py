@@ -8,7 +8,7 @@ def algorithm(filename):
   startState, gameMap = readGame(filename)
   queue = [startState]
   while True:  # Continue loop until a finished game state appears.
-    for x in feedForward(queue.pop(0)):
+    for x in feedForward(queue.pop(0), gameMap):
       # Check if every new game state is finished. If so, close loop and return that gamestate.
       if x[-1] == 1:
         return x
@@ -36,11 +36,15 @@ def readGame(filename):
   return startState, gameMap
 
 
-def feedForward(gameState):
+def feedForward(gameState, gameMap):
   new_states = []
+  print('.', end='')
   for i in range(1, 5):
     game = Game(gameState, gameMap)
     game.play(i)
     if game.getGameState() != None:
       new_states.append(game.getGameState())
   return new_states
+
+
+print(algorithm("sokoban.txt"))

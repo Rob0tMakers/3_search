@@ -13,7 +13,7 @@ class Game:
     # save gameMap
     self.gameMap = gameMap
     # game status
-    self.moveHistory = gameState[2]
+    self.moveHistory = gameState[2].copy()
     self.isFinished = 0
 
   def checkIfFinished(self):
