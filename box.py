@@ -1,4 +1,4 @@
-class Player:
+class Box:
   def __init__(self, x, y):
     self.x = x
     self.y = y
@@ -6,6 +6,3 @@ class Player:
   def move(self, x, y):
     self.x = x
     self.y = y
-
-  def checkWallCollision(self):
-    return None
