@@ -14,41 +14,52 @@ class Game:
     self.gameMap = gameMap
     # game status
     self.moveHistory = gameState[2]
-    self.isFinished = False
-    self.invalidMove = False
-
-  def checkWallCollision(self, obj):
-    for wall in self.gameMap.walls:
-      if [obj.player.x, obj.player.y] == wall:
-        return True
-    return False
+    self.isFinished = 0
 
   def checkIfFinished(self):
     for box in self.boxes:
-      if [box.x, box.y] not in self.gameMap.goals:
-        return
-    self.isFinished = 1
+      if box.getCoords() not in self.gameMap.goals:
+        return 0
+    return 1
+
+  def checkWallCollision(self):
+    for wall in self.gameMap.walls:
+      if self.player.getCoords() == wall:
+        return True
+      for box in self.boxes:
+        if box.getCoords() == wall:
+          return True
+    return False
 
   def checkBoxCollision(self):
-    return None
+    uniqueBoxes = set(self.getBoxCoords())
+    if len(uniqueBoxes) < len(self.boxes):
+      return True
+    return False
 
-  def updateBoxes(self):
+  def moveBoxes(self):
+    for box in self.boxes:
+      if self.player.getCoords() == box.getCoords():
+        box.move(self.moveHistory[-1])
+
+  def getBoxCoords(self):
+    boxes = []
+    for box in self.boxes:
+      boxes.append(box.getCoords())
+    return boxes
 
   def play(self, move):
-    # 1 = "north", 2 = "east", 3 = "south", 4 = "west"
-    player.move(move)
+    # player moves
+    self.player.move(move)
     self.moveHistory.append(move)
 
-    # checks
-    checkWallCollision()
-    checkIfFinished()
+    # box gets pushed
+    self.moveBoxes()
+
+    self.isFinished == self.checkIfFinished()
 
   def getGameState(self):
-    if self.invalidMove == True:
+    if self.checkWallCollision() == True or self.checkBoxCollision() == True:
       return None
     # player, boxes, move history, isFinished(0=notFinished, 1=finished)
-    return [[2, 1], [[1, 2], [2, 2], [4, 2], [4, 3], [3, 5]], [1, 2, 3, 3, 4, 5, 1, 0], 0]
-
- # [1 = "n", 2 = "e", 3 = "s", 4 = "w"]
-
- # up down left right
+    return [self.player.getCoords(), self.getBoxCoords(), self.moveHistory, self.isFinished]
