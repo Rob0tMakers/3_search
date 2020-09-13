@@ -6,10 +6,11 @@ from map import Map
 
 def algorithm(filename):
   startState, gameMap = readGame(filename)
-  queue = [startState]
-  for i in queue:
-    # also need to remove i. don't forget.
-    queue.append(feedForward(queue[i]))
+  #queue = [startState]
+  queue = ['h', 'e', 'l']
+  for x in feedForward(queue.pop(0)):
+    queue.append(x)
+  return queue
 
 
 def readGame(filename):
@@ -33,13 +34,15 @@ def readGame(filename):
   return startState, gameMap
 
 
-def feedForward():
-  game = Game(queue[i], gameMap)
-  game.play(1, 2, 3, 4)
-  game.getGamestate(None)
-  [valid, null, valid]
+def feedForward(gameState):
+  return [0, 1]
+  # game = Game(gameState, gameMap)
+  # for i in range(1,5):
+  #   game.play(i)
+  # game.getGamestate(None)
+  # [valid, null, valid]
 
   # if game.isFinished():
 
 
-print(readGame("sokoban.txt"))
+print(algorithm("sokoban.txt"))
