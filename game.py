@@ -22,6 +22,19 @@ class Game:
         return 0
     return 1
 
+  def isGameOver(self):
+    for box in self.getBoxCoords():
+      adjacentWallCount = 0
+      for wall in self.gameMap.walls:
+        if wall[0] == (box[0] + 1 or box[0] - 1):
+          adjacentWallCount += 1
+        if wall[1] == (box[1] + 1 or box[1] - 1):
+          adjacentWallCount += 1
+      if adjacentWallCount > 1 and box not in self.gameMap.goals:
+        return True
+
+    return False
+
   def checkWallCollision(self):
     for wall in self.gameMap.walls:
       if self.player.getCoords() == wall:
@@ -59,7 +72,7 @@ class Game:
     self.isFinished == self.checkIfFinished()
 
   def getGameState(self):
-    if self.checkWallCollision() == True or self.checkBoxCollision() == True:
+    if self.checkWallCollision() == True or self.checkBoxCollision() == True or self.isGameOver() == True:
       return None
     # player, boxes, move history, isFinished(0=notFinished, 1=finished)
     return [self.player.getCoords(), self.getBoxCoords(), self.moveHistory, self.isFinished]
