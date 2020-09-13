@@ -5,7 +5,8 @@ from map import Map
 
 
 def algorithm(filename):
-  queue = [readGame(filename)]
+  startState, gameMap = readGame(filename)
+  queue = [startState]
   for i in queue:
     # also need to remove i. don't forget.
     queue.append(feedForward(queue[i]))
@@ -29,7 +30,7 @@ def readGame(filename):
       if icon == '.':
         gameMap.goals.append([x, y])
   startState = [playerCoords, boxes, [], 0]
-  return startState
+  return startState, gameMap
 
 
 def feedForward():
