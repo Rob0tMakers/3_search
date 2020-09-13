@@ -44,6 +44,3 @@ def feedForward(gameState):
     if game.getGamestate() != None:
       new_states.append(game.getGamestate())
   return new_states
-
-
-print(algorithm("sokoban.txt"))
