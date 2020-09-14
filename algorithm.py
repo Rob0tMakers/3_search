@@ -14,6 +14,7 @@ def algorithm(filename):
         return x[2]
       queue.append(x)
 
+
 def readGame(filename):
   f = open(filename, "r")
   gameMap = Map()
@@ -45,4 +46,25 @@ def feedForward(gameState, gameMap):
   return new_states
 
 
-#print(algorithm("sokoban.txt"))
+def translate(directions):
+  move_1 = directions.pop(0)
+  start = {
+      1: "North",
+      2: "East",
+      3: "South",
+      4: "West"
+  }[move_1]
+  prev_move = move_1
+  moves = []
+  while directions:
+    move_next = directions.pop(0)
+    if move_next == prev_move:
+      moves.append(0)  # go straight
+    elif move_next == prev_move + 1 or (move_next == 1 and prev_move == 4):
+      moves.append(1)  # turn right
+    elif move_next == prev_move - 1 or (move_next == 4 and prev_move == 1):
+      moves.append(2)  # turn left
+    elif abs(move_next - prev_move) == 2:
+      moves.append(3)  # turn 180 deg
+    prev_move = move_next
+  return start, moves
