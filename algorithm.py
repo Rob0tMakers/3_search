@@ -38,7 +38,6 @@ def readGame(filename):
 
 def feedForward(gameState, gameMap):
   new_states = []
-  print('.', end='')
   for i in range(1, 5):
     game = Game(gameState, gameMap)
     game.play(i)
@@ -47,4 +46,4 @@ def feedForward(gameState, gameMap):
   return new_states
 
 
-print(algorithm("sokoban.txt"))
+#print(algorithm("sokoban_E.txt"))
