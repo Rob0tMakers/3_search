@@ -46,4 +46,4 @@ def feedForward(gameState, gameMap):
   return new_states
 
 
-#print(algorithm("sokoban_E.txt"))
+# print(algorithm("sokoban_E.txt"))
