@@ -11,9 +11,8 @@ def algorithm(filename):
     for x in feedForward(queue.pop(0), gameMap):
       # Check if every new game state is finished. If so, close loop and return that gamestate.
       if x[-1] == 1:
-        return x
+        return x[2]
       queue.append(x)
-
 
 def readGame(filename):
   f = open(filename, "r")
@@ -46,4 +45,4 @@ def feedForward(gameState, gameMap):
   return new_states
 
 
-# print(algorithm("sokoban_E.txt"))
+#print(algorithm("sokoban.txt"))
