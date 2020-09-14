@@ -17,10 +17,10 @@ class Game:
     self.isFinished = 0
 
   def checkIfFinished(self):
-    for box in self.boxes:
-      if box.getCoords() not in self.gameMap.goals:
-        return 0
-    return 1
+    if set(self.getBoxCoords()) == set(self.gameMap.goals):
+      return 1
+    else:
+      return 0
 
   def isGameOver(self):
     for box in self.getBoxCoords():
@@ -69,10 +69,11 @@ class Game:
     # box gets pushed
     self.moveBoxes()
 
-    self.isFinished == self.checkIfFinished()
+    self.isFinished = self.checkIfFinished()
 
   def getGameState(self):
-    if self.checkWallCollision() == True or self.checkBoxCollision() == True or self.isGameOver() == True:
+    # or self.isGameOver() == True:
+    if self.checkWallCollision() == True or self.checkBoxCollision() == True:
       return None
     # player, boxes, move history, isFinished(0=notFinished, 1=finished)
     return [self.player.getCoords(), self.getBoxCoords(), self.moveHistory, self.isFinished]

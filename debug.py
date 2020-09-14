@@ -12,7 +12,7 @@ from algorithm import algorithm, readGame, feedForward
 # TO DO: Check win state?
 # TO DO:
 
-startState, gameMap = readGame("sokoban.txt")
+startState, gameMap = readGame("sokoban_E.txt")
 print(startState)
 print()
 print("North")
@@ -21,10 +21,10 @@ print(game.moveHistory)
 game.play(1)
 print(game.getGameState())
 print()
-print("South")
+print("East")
 print("Start" + str(startState))
 game1 = Game(startState, gameMap)
 print(game1.moveHistory)
-game1.play(3)
+game1.play(2)
 print(game1.getGameState())
 print()
