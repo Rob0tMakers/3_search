@@ -8,9 +8,8 @@ from algorithm import algorithm, readGame, feedForward
 # Player cannot move into walls
 # Player can push blocks
 # Move history is transferred correctly
+# Win state works.
 # TO DO: double check if blocks can be pushed into walls?
-# TO DO: Check win state?
-# TO DO:
 
 startState, gameMap = readGame("sokoban_E.txt")
 print(startState)

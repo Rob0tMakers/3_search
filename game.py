@@ -22,17 +22,31 @@ class Game:
     else:
       return 0
 
-  def isGameOver(self):
-    for box in self.getBoxCoords():
-      adjacentWallCount = 0
-      for wall in self.gameMap.walls:
-        if wall[0] == (box[0] + 1 or box[0] - 1):
-          adjacentWallCount += 1
-        if wall[1] == (box[1] + 1 or box[1] - 1):
-          adjacentWallCount += 1
-      if adjacentWallCount > 1 and box not in self.gameMap.goals:
-        return True
+  # def isGameOver(self):  # will see if box in a corner.
+  #   for box in self.getBoxCoords():
+  #     adjacentWallCount = 0
+  #     for wall in self.gameMap.walls:
+  #       if wall[0] == (box[0] + 1 or box[0] - 1) and wall[1] == box[1]:
+  #         adjacentWallCount += 1
+  #       if wall[0] == box[0] and wall[1] == (box[1] + 1 or box[1] - 1):
+  #         adjacentWallCount += 1
+  #     if adjacentWallCount > 1 and box not in self.gameMap.goals:
+  #       print(adjacentWallCount)
+  #       return True
 
+  #   return False
+
+  def isGameOver(self):  # will see if box in a corner.
+    for box in self.getBoxCoords():
+      on_x = False  # Flanked on x axis
+      on_y = False  # Flanked on y axis
+      for wall in self.gameMap.walls:
+        if wall[0] == (box[0] + 1 or box[0] - 1) and wall[1] == box[1]:
+          on_x = True
+        if wall[0] == box[0] and wall[1] == (box[1] + 1 or box[1] - 1):
+          on_y = True
+      if on_x and on_y and box not in self.gameMap.goals:
+        return True
     return False
 
   def checkWallCollision(self):
@@ -54,6 +68,7 @@ class Game:
     for box in self.boxes:
       if self.player.getCoords() == box.getCoords():
         box.move(self.moveHistory[-1])
+        self.moveHistory.append(-1)  # Note that a box was pushed.
 
   def getBoxCoords(self):
     boxes = []
@@ -72,8 +87,7 @@ class Game:
     self.isFinished = self.checkIfFinished()
 
   def getGameState(self):
-    # or self.isGameOver() == True:
-    if self.checkWallCollision() == True or self.checkBoxCollision() == True:
+    if self.checkWallCollision() == True or self.checkBoxCollision() == True or self.isGameOver() == True:
       return None
     # player, boxes, move history, isFinished(0=notFinished, 1=finished)
     return [self.player.getCoords(), self.getBoxCoords(), self.moveHistory, self.isFinished]
